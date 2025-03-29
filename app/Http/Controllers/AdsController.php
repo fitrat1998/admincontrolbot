@@ -39,6 +39,8 @@ class AdsController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'file_path' => $filePath,
+            'status' => $request->status,
+            'duration' => $request->duration,
         ]);
 
         return redirect()->route('ads.index')->with('success', 'Реклама бомуваффақият илова карда шуд!');
@@ -66,6 +68,8 @@ class AdsController extends Controller
 
         $ad->title = $request->input('title');
         $ad->description = $request->input('description');
+        $ad->status = $request->input('status');
+        $ad->duration = $request->input('duration');
 
 
         if ($request->hasFile('file')) {
@@ -87,6 +91,16 @@ class AdsController extends Controller
     public function show(Ads $ad)
     {
         return view('ads.show', compact('ad'));
+    }
+
+    public function showAds(Request $request)
+    {
+        $ads = Ads::where('is_seen', false)->take(2)->get();
+
+        // Reklamalarni ko‘rilgan deb belgilash
+        Ads::whereIn('id', $ads->pluck('id'))->update(['is_seen' => true]);
+
+        return view('ads.index', compact('ads'));
     }
 
     public function destroy(Ads $ad)

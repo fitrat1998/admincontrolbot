@@ -45,6 +45,8 @@
                                 <th>Унвон</th>
                                 <th>Тавсиф</th>
                                 <th>Файл</th>
+                                <th>Статус</th>
+                                <th>Давомнокӣ</th>
                                 <th class="w-25">Амалҳо</th>
                             </tr>
                             </thead>
@@ -56,28 +58,30 @@
                                     <td>{{ $ad->description }}</td>
 
                                     <td>
-                                   @php
-                                    $fileUrl = asset('storage/' . $ad->file_path);
-                                    $extension = pathinfo($ad->file_path, PATHINFO_EXTENSION);
-                                @endphp
+                                    @php
+                                        $fileUrl = asset('storage/' . $ad->file_path);
+                                        $extension = pathinfo($ad->file_path, PATHINFO_EXTENSION);
+                                    @endphp
 
-                                @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                    <!-- Rasm -->
-                                    <img src="{{ $fileUrl }}" alt="Реклама" width="150">
+                                    @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
+                                        <!-- Rasm -->
+                                            <img src="{{ $fileUrl }}" alt="Реклама" width="150">
 
-                                @elseif (in_array($extension, ['mp4', 'webm', 'ogg']))
-                                    <!-- Video -->
-                                    <video width="300" controls>
-                                        <source src="{{ $fileUrl }}" type="video/{{ $extension }}">
-                                        Сизнинг браузерингиз видеони қўлламайди.
-                                    </video>
+                                    @elseif (in_array($extension, ['mp4', 'webm', 'ogg']))
+                                        <!-- Video -->
+                                            <video width="300" controls>
+                                                <source src="{{ $fileUrl }}" type="video/{{ $extension }}">
+                                                Сизнинг браузерингиз видеони қўлламайди.
+                                            </video>
 
-                                @else
-                                    <!-- Boshqa fayl -->
-                                    <a href="{{ $fileUrl }}" target="_blank">Файлни кўриш</a>
-                                @endif
+                                    @else
+                                        <!-- Boshqa fayl -->
+                                            <a href="{{ $fileUrl }}" target="_blank">Файлни кўриш</a>
+                                        @endif
 
                                     </td>
+                                    <td>{{ $ad->status }}</td>
+                                    <td>{{ $ad->duration }}</td>
 
 
                                     <td class="text-center w-25">

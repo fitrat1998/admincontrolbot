@@ -548,29 +548,23 @@
     });
 </script>
 
-{{--<script>--}}
-{{--    $(document).ready(function () {--}}
-{{--        $('#departmentSelect').select2();--}}
+<!-- JavaScript: switch tugmani matnni o'zgartirish -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const statusCheckbox = document.getElementById('status');
+        const statusLabel = document.getElementById('status-label');
 
-{{--        $('#departmentSelect').on('change', function () {--}}
-{{--            var selectedValues = $(this).val();--}}
-{{--            var allDepartmentsSelected = selectedValues.includes('all_departments');--}}
-
-{{--            if (allDepartmentsSelected) {--}}
-{{--                $('#departmentSelect').val(['all_departments']).trigger('change');--}}
-{{--                $('#departmentSelect option').each(function () {--}}
-{{--                    if ($(this).val() !== 'all_departments') {--}}
-{{--                        $(this).prop('disabled', true);--}}
-{{--                    }--}}
-{{--                });--}}
-{{--            } else {--}}
-{{--                $('#departmentSelect option').each(function () {--}}
-{{--                    $(this).prop('disabled', false);--}}
-{{--                });--}}
-{{--            }--}}
-{{--        });--}}
-{{--    });--}}
-{{--</script>--}}
+        statusCheckbox.addEventListener('change', function () {
+            if (statusCheckbox.checked) {
+                statusLabel.textContent = 'Фаол';
+                statusCheckbox.value = 'active';
+            } else {
+                statusLabel.textContent = 'Ғайрифаол';
+                statusCheckbox.value = 'inactive';
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

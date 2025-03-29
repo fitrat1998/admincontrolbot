@@ -32,28 +32,60 @@
                     <div class="card-body">
 
                         <form action="{{ route('ads.store') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
+                        @csrf
+                        <!-- Сарлавҳа -->
                             <div class="mb-3">
                                 <label for="title" class="form-label">Сарлавҳа:</label>
-                                <input type="text" name="title" class="form-control" required value="{{ old('title') }}">
+                                <input type="text" name="title" class="form-control" required
+                                       value="{{ old('title') }}">
                                 @if($errors->has('title'))
                                     <span class="error invalid-feedback">{{ $errors->first('title') }}</span>
                                 @endif
                             </div>
 
+                            <!-- Тавсифи -->
                             <div class="mb-3">
                                 <label for="description" class="form-label">Тавсифи:</label>
-                                <textarea name="description" class="form-control" value="{{ old('description') }}"></textarea>
+                                <textarea name="description" class="form-control">{{ old('description') }}</textarea>
                                 @if($errors->has('description'))
                                     <span class="error invalid-feedback">{{ $errors->first('description') }}</span>
                                 @endif
                             </div>
 
+                            <!-- Тасвир/видеоро бор кунед -->
                             <div class="mb-3 border-2 p-2">
                                 <label for="file" class="form-label">Тасвир/видеоро бор кунед:</label>
                                 <input type="file" name="file" class="form-control" required>
                                 @if($errors->has('file'))
                                     <span class="error invalid-feedback">{{ $errors->first('file') }}</span>
+                                @endif
+                            </div>
+
+                            <!-- Статус (Фаол/Ғайрифаол) -->
+                            <div class="mb-3">
+                                <label for="status" class="form-label d-block">Статус:</label>
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="status" name="status"
+                                           value="active"
+                                        {{ old('status', $ad->status) == 'active' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="status" id="status-label">
+                                        {{ old('status', $ad->status) == 'active' ? 'Фаол' : 'Ғайрифаол' }}
+                                    </label>
+                                </div>
+
+                                @if($errors->has('status'))
+                                    <span class="error invalid-feedback">{{ $errors->first('status') }}</span>
+                                @endif
+                            </div>
+
+                            <!-- Давомнокӣ (секунда) -->
+                            <div class="mb-3">
+                                <label for="duration" class="form-label">Давомнокӣ (секунда):</label>
+                                <input type="number" name="duration" class="form-control"
+                                       value="{{ old('duration', 0) }}" required>
+                                @if($errors->has('duration'))
+                                    <span class="error invalid-feedback">{{ $errors->first('duration') }}</span>
                                 @endif
                             </div>
 
